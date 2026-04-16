@@ -1,4 +1,5 @@
 {
+  "$schema": "https://opencode.ai/config.json",
   "skills": {
     "gh-fix-ci": {
       "path": ".opencode/skills/gh-fix-ci"
