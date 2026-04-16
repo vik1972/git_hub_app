@@ -25,13 +25,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         user: {
           email: "new@example.com",
           password: "password123",
-          name: "New User"
+          name: "New User",
+          age: 25
         }
       }
     end
 
     assert_redirected_to user_url(User.last)
     assert_equal "User was successfully created.", flash[:notice]
+    assert_equal 25, User.last.age
   end
 
   test "should not create user with invalid params" do
@@ -61,7 +63,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     patch user_url(@user), params: {
       user: {
         name: "Updated Name",
-        email: "updated@example.com"
+        email: "updated@example.com",
+        age: 30
       }
     }
 
@@ -70,6 +73,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @user.reload
     assert_equal "Updated Name", @user.name
     assert_equal "updated@example.com", @user.email
+    assert_equal 30, @user.age
   end
 
   test "should not update user with invalid params" do
