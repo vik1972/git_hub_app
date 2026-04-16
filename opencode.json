@@ -1,0 +1,13 @@
+{
+  "skills": {
+    "gh-fix-ci": {
+      "path": ".opencode/skills/gh-fix-ci"
+    }
+  },
+  "permission": {
+    "skill": {
+      "*": "allow",
+      "gh-fix-ci": "allow"
+    }
+  }
+}
