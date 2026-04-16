@@ -5,7 +5,8 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(
       email: "test@example.com",
       password: "password123",
-      name: "Test User"
+      name: "Test User",
+      age: 25
     )
   end
 
@@ -74,5 +75,27 @@ class UserTest < ActiveSupport::TestCase
     @user.name = "a" * 101
     assert_not @user.valid?
     assert_includes @user.errors[:name], "is too long (maximum is 100 characters)"
+  end
+
+  test "should allow nil age" do
+    @user.age = nil
+    assert @user.valid?
+  end
+
+  test "should accept valid integer age" do
+    @user.age = 30
+    assert @user.valid?
+  end
+
+  test "should reject non-integer age" do
+    @user.age = 25.5
+    assert_not @user.valid?
+    assert_includes @user.errors[:age], "must be an integer"
+  end
+
+  test "should reject negative age" do
+    @user.age = -1
+    assert_not @user.valid?
+    assert_includes @user.errors[:age], "must be greater than or equal to 0"
   end
 end
